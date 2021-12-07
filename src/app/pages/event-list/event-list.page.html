@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Listado de Eventos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="listaEventos.length > 0;">
+    <ion-card *ngFor="let evento of listaEventos" routerLink="/event-detail/{{ evento.id }}">
+      <ion-card-title class="ion-text-center ion-padding">
+        {{ evento.nombre }}
+      </ion-card-title>
+      <ion-card-content>
+        <div class="ion-padding-horizontal">
+          <p>Costo: {{ evento.costo | currency: '$' : 'symbol' : '1.0-0' }}</p><br/>
+          <p>Fecha: {{ evento.fecha | date:'dd/MM/YYYY h:mm a' }}</p>
+          <p>Precio entrada: {{ evento.precio | currency: '$' : 'symbol' : '1.0-0' }}</p><br/>
+        </div>
+        <ion-chip color="{{ evento.ingresos < 0 ? 'danger': 'success' }}">
+          Ingresos: {{ evento.ingresos | currency: '$' : 'symbol' : '1.0-0' }}
+        </ion-chip>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
